@@ -1,0 +1,370 @@
+/* TYPPOGRAPHY */
+:root{
+    --holiday-font: "Inria Serif", serif;
+}
+
+.btn-numbers, .btn-operators, .btn-clear, .btn-equals, #equation-display, #output-display{
+    font-family: var(--holiday-font);
+    font-weight: 700;
+    font-size: 17px;
+}
+/* ------------------------------- */
+
+body{
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    min-height: 100vh;      /* Takes up 100% of the viewport height */
+    background-color: #f0f0f0; /* A neutral gray so your blue app stands out */
+}
+
+#main-screen{
+    /* width: 344px;
+    height: 527px; */
+    width: auto;
+    height: auto;
+    padding: 15px;
+    padding-top: 9px;
+
+    background: 
+        radial-gradient(
+            ellipse farthest-side at 50% 50%, 
+            rgb(200,213,250, 0.5) 0%, 
+            rgb(200,213,250, 0.5) 81%, 
+            rgb(90, 183, 255, 0.5) 100%
+        ),
+
+        linear-gradient(
+            #C8D5FA 0%, 
+            #84C3F4 50%, 
+            #29A1FF 75%
+        );
+
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    transform: scale(1.1);
+}
+
+/* ------------------------------- */
+#title-bar-buttons{
+    display: flex;
+    justify-content: right;
+    gap: 5px;
+}
+
+#wc-minimize, #wc-restore, #wc-close {
+    width: 23px; 
+    height: 23px; 
+    border-radius: 50%;
+    border: none; 
+    position: relative;
+    overflow: visible;
+}
+
+#wc-minimize{
+    background: 
+        linear-gradient( 160deg,
+            #009688 10%, 
+            #004D40 80%, 
+            #004D40 100%
+        );
+
+    box-shadow: 
+        0px 6px 4px 0px rgb(0, 0, 0, 0.25), 
+        inset 0px -4px 8px 0px rgb(0, 0, 0, 0.25), 
+        inset 0px 2px 4px 0px rgb(255, 255, 255, 0.40);
+}
+
+#wc-restore{
+    background: 
+        linear-gradient( 135deg,  
+            #FFF94A 10%, 
+            #D4A017 100%
+        );
+
+    box-shadow: 
+        0px 6px 4px 0px rgb(0, 0, 0, 0.25), 
+        inset 0px -4px 4px 0px rgb(0, 0, 0, 0.25), 
+        inset 0px 6px 4px 0px rgb(255, 255, 255, 0.40);
+}
+
+#wc-close{
+    background: 
+        linear-gradient( 135deg, 
+            #E5383B 10%, 
+            #660708 100%
+        );
+
+    box-shadow: 
+        0px 6px 4px 0px rgb(0, 0, 0, 0.25), 
+        inset 0px -4px 4px 0px rgb(0, 0, 0, 0.25), 
+        inset 0px 4px 4px 0px rgb(255, 255, 255, 0.40);
+}
+
+/* Bail and String */
+#wc-minimize::before, 
+#wc-restore::before, 
+#wc-close::before{
+    content: "";
+    position: absolute;
+    
+    width: 10px;
+    height: 20px;
+    top: -13.9px; /* Positioned above the ornament */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    background: url(/static/img/bail.svg) no-repeat center/contain;
+}
+
+/* Shine effect */
+#wc-minimize::after, 
+#wc-restore::after, 
+#wc-close::after{
+    content: "";
+    position: absolute;
+
+    width: 5px; 
+    height: 5px;
+    top: 10%;
+    left: 25%;
+
+    background: rgb(255, 255, 255);
+    border-radius: 50%; 
+    filter: blur(2px);
+}
+
+/* -------------------------------- */
+#display-screen{
+    width: 340px;
+    height: 175px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content:center;
+    align-items: flex-end;
+
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    /* APPEARANCE */
+    border: 2px solid transparent;
+    border-radius: 15px;
+    background: 
+        linear-gradient(
+            #FFFFFF 0%, 
+            #CCCCCC 83%, 
+            #999999 100%
+        ) padding-box, 
+        linear-gradient( 315deg, 
+            #FFCC00 0%, 
+            rgb(153, 122, 0, 0.9) 22%, 
+            #FFCC00 47%, 
+            rgb(255, 204, 0, 0.95) 58%, 
+            rgb(153, 122, 0, 0.9) 77%, 
+            #FFCC00 100% 
+        ) border-box;
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
+
+    /* Shadows */
+    box-shadow: inset 0px -6px 4px 1px rgb(0, 0, 0, 0.1);
+    box-shadow: inset 0px 6px 4px 1px rgb(0, 0, 0, 0.1);
+}
+
+#equation-display, #output-display{
+    padding-right: 10px;
+    color: #1F2766;
+    font-size: larger;
+    overflow: hidden;
+}
+
+#output-display{
+    font-size: 50px;
+}
+
+/* -------------------------------- */
+#buttons{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: auto;
+    column-gap: 20px;
+    row-gap: 10px;
+}
+
+.btn-operators{
+    width: 65px;
+    height: 40px;
+    
+    /* APPEARANCE */
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: 
+        url(/static/img/stars.svg) no-repeat center / 90% padding-box, 
+        linear-gradient(
+            #009688 0%, 
+            #004D40 70%, 
+            #004D40 100%
+        ) padding-box, 
+        
+        linear-gradient( 315deg, 
+            #FFCC00 0%, 
+            rgb(153, 122, 0, 0.9) 22%, 
+            #FFCC00 47%, 
+            rgb(255, 204, 0, 0.95) 58%, 
+            rgb(153, 122, 0, 0.9) 77%, 
+            #FFCC00 100% 
+        ) border-box;
+    ;
+    background-clip: padding-box, padding-box, border-box;
+    background-origin: border-box;
+
+    box-shadow: 
+        0px 6px 4px rgb(0, 0, 0, 0.25), 
+        inset 0px -4px 4px rgb(0, 0, 0, 0.25);
+
+    color: #FFFFFF;     /* font color */
+}
+
+.btn-numbers{
+    width: 65px;
+    height: 40px;
+    
+    /* APPEARANCE */
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: 
+        url(/static/img/snowflakes.svg) no-repeat 50% 20% / 90% padding-box, 
+        linear-gradient(
+            #E0F9FA 0%, 
+            #2A8FBD 100%
+        ) padding-box, 
+        
+        linear-gradient( 315deg, 
+            #FFCC00 0%, 
+            rgb(153, 122, 0, 0.9) 22%, 
+            #FFCC00 47%, 
+            rgb(255, 204, 0, 0.95) 58%, 
+            rgb(153, 122, 0, 0.9) 77%, 
+            #FFCC00 100% 
+        ) border-box;
+    ;
+    background-clip: padding-box, padding-box, border-box;
+    background-origin: border-box;
+
+    color: #1F2766;     /* font color */
+}
+
+.btn-clear{
+    width: 65px;
+    height: 40px;
+
+    position: relative; 
+    overflow: visible; /* ensures bleeding */ 
+    
+    /* APPEARANCE */
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: 
+        linear-gradient(
+            #FFFFFF 0%, 
+            #D1D5D8 36%, 
+            #8A949B 100%
+        ) padding-box, 
+        
+        linear-gradient( 315deg, 
+            #FFCC00 0%, 
+            rgb(153, 122, 0, 0.9) 22%, 
+            #FFCC00 47%, 
+            rgb(255, 204, 0, 0.95) 58%, 
+            rgb(153, 122, 0, 0.9) 77%, 
+            #FFCC00 100% 
+        ) border-box;
+        background-clip: padding-box, border-box;
+        background-origin: border-box;
+
+    box-shadow: 
+        0px 6px 4px rgb(0, 0, 0, 0.25), 
+        inset 0px -4px 4px rgb(0, 0, 0, 0.25);
+
+    color: #1F2766;     /* font color */
+}
+
+/* PSEUDO ELEMENT - virtual part of the selected element */
+/* ::after - inserts content immediately after the main content of the selected element */
+.btn-clear::after{
+    content: "";            /* makes the container exist*/
+    position: absolute;     /* can change the position manually*/
+    
+    /* size of holly */
+    width: 40px; 
+    height: 40px;
+    
+    /* positioning holly */
+    top: -13px; 
+    right: -16px;
+    
+    background: url(/static/img/holly.svg) no-repeat center/contain;
+    
+    z-index: 2;             /* on top of other elements*/
+    pointer-events: none;   /* only for decoration */
+}
+
+.btn-equals{
+    width: 65px;
+    height: 40px;
+    position: relative;
+    overflow: visible;
+    
+    /* APPEARANCE */
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: 
+        linear-gradient(
+            #E5383B 0%, 
+            #A52022 36%, 
+            #660708 100%
+        ) padding-box, 
+        
+        linear-gradient( 315deg, 
+            #FFCC00 0%, 
+            rgb(153, 122, 0, 0.9) 22%, 
+            #FFCC00 47%, 
+            rgb(255, 204, 0, 0.95) 58%, 
+            rgb(153, 122, 0, 0.9) 77%, 
+            #FFCC00 100% 
+        ) border-box;
+    ;
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
+
+    box-shadow: 
+        inset 0px 5px 4px rgb(255, 255, 255, 0.30),          
+        inset 0px -4px 4px rgb(0, 0, 0, 0.25), 
+        0px 6px 4px rgb(0, 0, 0, 0.25);
+
+    color: #FFFFFF;     /* font color */
+}
+
+ .btn-equals::after{
+    content: "";            /* makes the container exist*/
+    position: absolute;     /* can change the position manually*/
+    
+    /* size of tree */
+    width: 50px; 
+    height: 50px;
+    
+    /* positioning tree */
+    top: -2px; 
+    left: -21px;
+    
+    background: url(/static/img/christmasTree.svg) no-repeat center/contain;
+    
+    z-index: 10;             /* on top of other elements*/
+    pointer-events: none;   /* only for decoration */
+}
+
+/* ---------------- END ---------------- */
