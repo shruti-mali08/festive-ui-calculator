@@ -19,10 +19,10 @@ JavaScript functionality (calculator logic and interactions) is **planned and in
   <!-- Second row: Comparison Images -->
   <tr>
     <td><br>
-      <img src="./assets/images/festive-ui-calculator-preview-figma.png" width="auto" height="auto" alt="Figma Design">
+      <img src="./assets/images/festive-ui-calculator-preview-figma.png" width="400px" height="auto" alt="Figma Design">
     </td>
     <td> <br>
-      <img src="./assets/images/live-implementation.png" width="400" height="auto" alt="Implemented Design">
+      <img src="./assets/images/live-implementation.png" width="400px" height="auto" alt="Implemented Design">
     </td>
   </tr>
 </table>
