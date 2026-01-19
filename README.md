@@ -1,5 +1,5 @@
 # 🎄 Festive Logic: Christmas Calculator
-**Role: UI Design | Front-End**
+**UI Design | Front-End**
 > A sophisticated, holiday-themed calculator built with a "Design-First" approach. This project demonstrates the bridge between high-fidelity UI/UX design in Figma and responsive web implementation. 
 
 ## 🚀 Project Status 
